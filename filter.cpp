@@ -1,13 +1,10 @@
-#include "filter.h"
+#include "filter.hpp"
 
-// Buffer
-short buffer[WINDOW_LENGTH];
-
-// Might be useful to track this
-int items = 0;
+Filter::Filter(){
+}
 
 #define MIN(x,y) ((x > y) ? x : y)
-float get_average(){
+float Filter::get_average(){
     int sum = 0;
     int limit = MIN(items, WINDOW_LENGTH);
 
@@ -19,7 +16,7 @@ float get_average(){
 }
 #undef MIN
 
-void add_value(short val){
+void Filter::add_value(short val){
     // DW about it
     buffer[items++%WINDOW_LENGTH] = val;
 }

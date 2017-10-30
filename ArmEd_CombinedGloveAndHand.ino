@@ -149,8 +149,11 @@ void loop() {
   updateInput();
   for (int i = 0; i < array_len(inputPins); i++) {
     float avg = runningAvgs[i].get_average();
+    Serial.print(avg);
+    Serial.print(' ');
     unsigned int value = remap((int) avg);//basic floor for now
     setDigit(i, value);
   }
+  Serial.print('\n');
   calibrate(false);
 }

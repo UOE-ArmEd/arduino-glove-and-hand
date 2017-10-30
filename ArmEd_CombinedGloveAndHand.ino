@@ -24,6 +24,7 @@
 #define array_len( x )  ( sizeof( x ) / sizeof( *x ) )
 
 #include <Servo.h>
+#include "filter.hpp"
 
 struct Mapping {
   int input;
@@ -41,6 +42,8 @@ const unsigned int outputPins[] = {2, 3, 4};
 const Servo servos[3];
 unsigned int servoRangeMin[] = {0, 0, 0};
 unsigned int servoRangeMax[] = {85, 75, 75};
+
+Filter runningAvgs[3];
 
 //Mapping: Range(0,1023) -> Range(0,1023)
 Mapping mapping[3] = {
@@ -81,6 +84,13 @@ void setDigit(unsigned int index, unsigned int bend) {
   //Serial.print("Setting servo to:");
   //Serial.println(angle);
   servos[index].write(angle);
+}
+
+void updateInput() {
+  for (int i = 0; i < array_len(inputPins); i++) {
+    unsigned int value = analogRead(inputPins[i]);
+    runningAvgs[i].add_value(value);
+  }
 }
 
 int remap(unsigned int input) {
@@ -136,11 +146,14 @@ void calibrate(bool breakOnButton) {
 }
 
 void loop() {
+  updateInput();
   for (int i = 0; i < array_len(inputPins); i++) {
-    unsigned int value = analogRead(inputPins[i]);
-    value = remap(value);
+    float avg = runningAvgs[i].get_average();
+    Serial.print(avg);
+    Serial.print(' ');
+    unsigned int value = remap((int) avg);//basic floor for now
     setDigit(i, value);
   }
+  Serial.print('\n');
   calibrate(false);
 }
-

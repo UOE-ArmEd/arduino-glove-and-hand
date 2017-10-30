@@ -1,8 +1,5 @@
 #include "filter.hpp"
 
-Filter::Filter(){
-}
-
 #define MIN(x,y) ((x > y) ? x : y)
 float Filter::get_average(){
     int sum = 0;
@@ -20,6 +17,3 @@ void Filter::add_value(short val){
     // DW about it
     buffer[items++%WINDOW_LENGTH] = val;
 }
-
-
-

@@ -1,3 +1,10 @@
+/*
+ * Arm3d
+ *
+ * Kyle Montemayor
+ * kmonte@umd.edu
+ */
+
 #include "filter.hpp"
 
 Filter::Filter(){
@@ -21,5 +28,7 @@ void Filter::add_value(short val){
     buffer[items++%WINDOW_LENGTH] = val;
 }
 
-
+int Filter:total_elements(){
+    return items;
+}
 

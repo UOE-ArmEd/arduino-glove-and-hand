@@ -46,6 +46,16 @@ class Filter{
          */
         void add_value(short);
 
+
+        /*
+         * Returns totals number of elements
+         * that have ever been in the filter
+         * Mostly for debugging, but might 
+         * be useful otherwise
+         */
+
+        int total_elements();
+
     private:
         /*
          * Using shorts because I'm pretty sure the inputs are 10 bit

@@ -1,6 +1,6 @@
 #include "filter.hpp"
 
-#define MIN(x,y) ((x > y) ? x : y)
+#define MIN(x,y) ((x < y) ? x : y)
 float Filter::get_average(){
     unsigned int sum = 0;
     unsigned int limit = MIN(items, WINDOW_LENGTH);

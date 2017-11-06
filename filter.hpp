@@ -44,7 +44,7 @@ class Filter{
          * items that have ever been put in
          * the buffer
          */
-        void add_value(short);
+        void add_value(unsigned int);
 
     private:
         /*

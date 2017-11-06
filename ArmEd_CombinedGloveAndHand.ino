@@ -90,6 +90,8 @@ void updateInput() {
   for (int i = 0; i < array_len(inputPins); i++) {
     unsigned int value = analogRead(inputPins[i]);
     runningAvgs[i].add_value(value);
+    Serial.print(value);
+    Serial.print(' ');
   }
 }
 
@@ -153,6 +155,8 @@ void loop() {
     Serial.print(' ');
     unsigned int value = remap((int) avg);//basic floor for now
     setDigit(i, value);
+    Serial.print(value);
+    //Serial.print(' ');
   }
   Serial.print('\n');
   calibrate(false);

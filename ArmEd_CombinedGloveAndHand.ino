@@ -88,7 +88,6 @@ void setDigit(unsigned int index, unsigned int bend) {
 
 void updateInput() {
   for (int i = 0; i < array_len(inputPins); i++) {
-    if (i > 0) break;
     unsigned int value = analogRead(inputPins[i]);
     runningAvgs[i].add_value(value);
     Serial.print(value);
@@ -151,14 +150,13 @@ void calibrate(bool breakOnButton) {
 void loop() {
   updateInput();
   for (int i = 0; i < array_len(inputPins); i++) {
-    if (i > 0) break;
     float avg = runningAvgs[i].get_average();
     Serial.print(avg);
     Serial.print(' ');
     unsigned int value = remap((int) avg);//basic floor for now
     setDigit(i, value);
     Serial.print(value);
-    //Serial.print(' ');
+    Serial.print(' ');
   }
   Serial.print('\n');
   calibrate(false);

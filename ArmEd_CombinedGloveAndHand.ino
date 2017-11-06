@@ -3,7 +3,6 @@
     Combined glove and hand
     Created: 22/10/17
     TODO:
-        Input filtering (moving average).
         Setup calibration improvement
         In-use calibration improvement (exploration of use cases)
         Addition of controls for actual use (i.e. delay,

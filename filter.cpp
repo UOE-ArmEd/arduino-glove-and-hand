@@ -1,19 +1,30 @@
+/*
+ * Arm3d
+ *
+ * Kyle Montemayor
+ * kmonte@umd.edu
+ */
+
 #include "filter.hpp"
 
 #define MIN(x,y) ((x < y) ? x : y)
 float Filter::get_average(){
-    unsigned int sum = 0;
-    unsigned int limit = MIN(items, WINDOW_LENGTH);
+    float sum = 0.0;
+    int limit = MIN(items, WINDOW_LENGTH);
 
-    for(unsigned int i = 0; i < limit; i++){
-        sum += buffer[i];
+    for(int i = limit-1; i >= 0; i--){
+        sum += weights[i]*buffer[(i+items)%WINDOW_LENGTH];
     }
 
-    return (float)sum/limit;
+    return sum/limit;
 }
 #undef MIN
 
 void Filter::add_value(unsigned int val){
     // DW about it
     buffer[items++%WINDOW_LENGTH] = val;
+}
+
+int Filter:total_elements(){
+    return items;
 }

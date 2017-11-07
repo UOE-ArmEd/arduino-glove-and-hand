@@ -62,6 +62,18 @@ class Filter{
          * Might want to have dynamic sized buffers in the future
          */
         short buffer[WINDOW_LENGTH];
+        /*
+         * The weights if we want to treat this as a FIR
+         * The weights are in reverse order, eg the weight
+         * for the most recent element is the last on in the
+         * array
+         * 
+         * TODO: TUNE THIS
+         */
+        float weights[WINDOW_LENGTH] = {0.2, 0.2, 0.2, 0.2
+                                        0.4, 0.4, 0.4, 0.4
+                                        0.6, 0.6, 0.6, 0.6
+                                        0.8, 0.8, 1.0, 1.0};
 
         /* 
          * Count of how many total items have been put in the buffer

@@ -12,14 +12,14 @@ Filter::Filter(){
 
 #define MIN(x,y) ((x > y) ? x : y)
 float Filter::get_average(){
-    int sum = 0;
+    float sum = 0.0;
     int limit = MIN(items, WINDOW_LENGTH);
 
     for(int i = 0; i < limit; i++){
-        sum += buffer[i];
+        sum += buffer[(i+items)%WINDOW_LENGTH]*weights[i];
     }
 
-    return (float)sum/limit;
+    return sum/limit;
 }
 #undef MIN
 

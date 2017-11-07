@@ -15,8 +15,8 @@ float Filter::get_average(){
     float sum = 0.0;
     int limit = MIN(items, WINDOW_LENGTH);
 
-    for(int i = 0; i < limit; i++){
-        sum += buffer[(i+items)%WINDOW_LENGTH]*weights[i];
+    for(int i = limit-1; i >= 0; i--){
+        sum += weights[i]*buffer[(i+items)%WINDOW_LENGTH];
     }
 
     return sum/limit;

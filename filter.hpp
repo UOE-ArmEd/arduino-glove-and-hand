@@ -1,11 +1,19 @@
-/* 
+/*
  * Arm3d
  * Simple window filter for the inputs
  * Implemented with a "ring buffer"
  *
  * If we wanted to, it would be pretty easy to weight the filter
+<<<<<<< HEAD
  * 
  * TODO: Per filter lengths
+=======
+ *
+ * TODO: Per buffer lengths
+ * TODO: Make sure it works with arduino (Might have to make it a class?)
+ * TODO: Make sure we can instantiate multiple buffers (malloc maybe, or with classes idk)
+ * TODO: Weighted rolling average
+>>>>>>> 0bcf5629ace31fedf7b5cfa8c83a892c05b8d512
  * TODO: Properly test __EVERYTHING__
  *
  * Kyle Montemayor
@@ -20,14 +28,18 @@ class Filter{
      */
      #define WINDOW_LENGTH 16
 
-    public:
+   public:
         /*
          * Computes and returns the average in the buffer
+<<<<<<< HEAD
          * I think it's better to compute it here vs in 
+=======
+         * I think it's better to computer it here vs in
+>>>>>>> 0bcf5629ace31fedf7b5cfa8c83a892c05b8d512
          * get_average() because we should be updating the
          * buffer more than we poll it
          *
-         * If not then we can compute the average as we 
+         * If not then we can compute the average as we
          * add new values
          */
         float get_average();
@@ -40,7 +52,7 @@ class Filter{
          * items that have ever been put in
          * the buffer
          */
-        void add_value(short);
+        void add_value(unsigned int);
 
 
         /*
@@ -72,13 +84,12 @@ class Filter{
                                         0.6, 0.6, 0.6, 0.6
                                         0.8, 0.8, 1.0, 1.0};
 
-        /* 
+        /*
          * Count of how many total items have been put in the buffer
          * Also used to keep track of the last item added
-         * 
+         *
          */
         int items = 0;
-    
+
 };
 #endif
-

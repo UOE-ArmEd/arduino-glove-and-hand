@@ -7,10 +7,7 @@
 
 #include "filter.hpp"
 
-Filter::Filter(){
-}
-
-#define MIN(x,y) ((x > y) ? x : y)
+#define MIN(x,y) ((x < y) ? x : y)
 float Filter::get_average(){
     float sum = 0.0;
     int limit = MIN(items, WINDOW_LENGTH);
@@ -23,7 +20,7 @@ float Filter::get_average(){
 }
 #undef MIN
 
-void Filter::add_value(short val){
+void Filter::add_value(unsigned int val){
     // DW about it
     buffer[items++%WINDOW_LENGTH] = val;
 }
@@ -31,4 +28,3 @@ void Filter::add_value(short val){
 int Filter:total_elements(){
     return items;
 }
-

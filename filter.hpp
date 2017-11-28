@@ -5,10 +5,7 @@
  *
  * If we wanted to, it would be pretty easy to weight the filter
  * 
- * TODO: Per buffer lengths
- * TODO: Make sure it works with arduino (Might have to make it a class?)
- * TODO: Make sure we can instantiate multiple buffers (malloc maybe, or with classes idk)
- * TODO: Weighted rolling average
+ * TODO: Per filter lengths
  * TODO: Properly test __EVERYTHING__
  *
  * Kyle Montemayor
@@ -26,13 +23,12 @@ class Filter{
     public:
         /*
          * Computes and returns the average in the buffer
-         * I think it's better to computer it here vs in 
+         * I think it's better to compute it here vs in 
          * get_average() because we should be updating the
          * buffer more than we poll it
          *
          * If not then we can compute the average as we 
          * add new values
-         *
          */
         float get_average();
 
@@ -62,6 +58,7 @@ class Filter{
          * Might want to have dynamic sized buffers in the future
          */
         short buffer[WINDOW_LENGTH];
+
         /*
          * The weights if we want to treat this as a FIR
          * The weights are in reverse order, eg the weight
